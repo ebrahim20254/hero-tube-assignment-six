@@ -16,37 +16,37 @@ const handleLoadData = async (categoryId) => {
     console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await res.json();
-    console.log(data.data);
+    const card = data.data;
+    console.log(card);
 
     const cardContainer  = document.getElementById('card-container');
-    // error massage do data 
-        const noImage = document.getElementById('error-massage');
-        const errorDiv = document.createElement('div');
-        errorDiv.innerHTML=`  <div class="flex justify-center">
-          <img src="./image/Icon.png" alt="">
-         </div>
-         <p class="font-bold text-4xl text-center mt-4">Oops!! Sorry, There is no <br> content here</p>`;
-        if(data.length > 0){
-          errorDiv.classList.remove('hidden')
-        }else{
-          errorDiv.classList.add('hidden')
-        }
-        noImage.appendChild(errorDiv);
     cardContainer.innerHTML = "";
+
+    // error massage do data 
+    const noImage = document.getElementById('error-massage');
+   
+    if(card.length == 0){
+      noImage.classList.remove('hidden')
+    }
+    else{
+      noImage.classList.add('hidden')
+    }
     data.data.forEach((hero)=>{
         // console.log(hero);  
         const div = document.createElement('div');
-        div.innerHTML = `<div class="card h-full space-y-4 bg-gray-200 shadow-xl">
-        <figure class = "w-full"><img  src="${hero?.thumbnail}" alt="Shoes" /></figure>
+        div.innerHTML = `<div class="card h-90 w-90 space-y-4 bg-gray-200 shadow-xl">
+        <figure>
+        <img class="w-full h-[250px]"  src="${hero?.thumbnail}" alt="Shoes" />
+        </figure>
         <div class="flex items-center gap-4 ">
          <img class="h-12 w-12 rounded-full" src="${hero?.authors[0].profile_picture}" alt="">
           <p class="font-bold">${hero?.title}</p>
         </div>
           <div class="flex gap-2">
-          <h3>${hero.authors[0].profile_name}</h3>
+          <h3 class="font-bold">${hero.authors[0].profile_name}</h3>
           <img src="${hero?.authors[0]?.verified ? hero.authors[0].verified: '/image/right.png' }" alt="">
         </div>
-        <p>${hero.others.views}</P>
+        <p class="font-bold">${hero.others.views}</P>
       </div>`;
       cardContainer.appendChild(div);
          

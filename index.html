@@ -14,7 +14,7 @@
              <img src="./image/Logo.png" alt="">
             </div>
             <div class="navbar-center hidden lg:flex">
-            <button class="btn btn-accent">Sort by view</button>
+            <button onclick="handleShortBtn()" class="btn btn-accent">Sort by view</button>
             </div>
             <div class="navbar-end">
               <a href="./blog.html" class="btn bg-[#FF1F3D] text-white">Blog</a>
@@ -31,8 +31,15 @@
               </div> -->
         </div>
         <!-- card show data browser -->
-        <div id="card-container" class="grid md:grid-cols-1 lg:grid-cols-4 gap-4 my-12">
+        <div id="card-container" class="grid md:grid-cols-1 lg:grid-cols-4 gap-4 my-12 space-y-4">
            
+        </div>
+        <!-- error massage  -->
+        <div id="error-massage" class="hidden">
+            <!-- <div class="flex justify-center">
+             <img src="./image/Icon.png" alt="">
+            </div>
+            <p class="font-bold text-4xl text-center mt-4">Oops!! Sorry, There is no <br> content here</p> -->
         </div>
         
     </main>

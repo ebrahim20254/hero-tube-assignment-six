@@ -8,10 +8,9 @@ const handleCategory = async () => {
         heroContainer.appendChild(heroDiv);
     });
 
-    // console.log(data.data);
 }
 
-// show data picture 
+// show all data picture 
 const handleLoadData = async (categoryId) => {
     console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
@@ -22,7 +21,7 @@ const handleLoadData = async (categoryId) => {
     const cardContainer  = document.getElementById('card-container');
     cardContainer.innerHTML = "";
 
-    // error massage do data 
+    // error massage  
     const noImage = document.getElementById('error-massage');
    
     if(card.length == 0){
@@ -31,12 +30,14 @@ const handleLoadData = async (categoryId) => {
     else{
       noImage.classList.add('hidden')
     }
+
     data.data.forEach((hero)=>{
         // console.log(hero);  
         const div = document.createElement('div');
         div.innerHTML = `<div class="card h-90 w-90 space-y-4 bg-gray-200 shadow-xl">
         <figure>
         <img class="w-full h-[250px]"  src="${hero?.thumbnail}" alt="Shoes" />
+        <span onclick="handleTimeSet()" class="absolute right-10 bg-black text-white bottom-40 px-2">${hero.others.posted_date}</span>
         </figure>
         <div class="flex items-center gap-4 ">
          <img class="h-12 w-12 rounded-full" src="${hero?.authors[0].profile_picture}" alt="">
@@ -54,44 +55,29 @@ const handleLoadData = async (categoryId) => {
         
 
 };
-// const handleShortBtn = () => {
-//   // console.log('button clicked');
-//   const shortData = cardContainer.sort((a,b)=>{
-//     a = a?.others.views;
-//     a = parseFloat(a.replace("k", ""));
-
-//     b = b?.others.views;
-//     b = parseFloat(b.replace("k",""));
-//     return b-a;
-//   });
-//   cardContainer(sh)
-// }
-
-// function handleTimeSet(){
-//   console.log(second);
-
-//   const days = Math.floor(second / (3600 * 24));
-//   second -= days * (3600 * 24);
-
-//   const hours = Math.floor(second / 3600);
-//   second -= hours * 3600;
-
-//   const minutes =  Math.floor(second / 60);
-//   second -= minutes * 60;
-
-//   let handleTimeSet = "";
-
-//   if(days > 0){
-//     handleTimeSet += `${days} day`;
-//     if(days >1){
-//       handleTimeSet += "s";
-//     }
-//   }
-// }
-
-{/* <p onclick="handleTimeSet()" class="text-end">${hero.others.posted_date}</p> */}
 
 
+function handleTimeSet(){
+  console.log(second);
+
+  const days = Math.floor(second / (3600 * 24));
+  second -= days * (3600 * 24);
+
+  const hours = Math.floor(second / 3600);
+  second -= hours * 3600;
+
+  const minutes =  Math.floor(second / 60);
+  second -= minutes * 60;
+
+  let handleTimeSet = "";
+
+  if(days > 0){
+    handleTimeSet += `${days} day`;
+    if(days >1){
+      handleTimeSet += "s";
+    }
+  }
+}
 
 
 
